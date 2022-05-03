@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    {% for literature in my_literature %}
+        <h3>{{ literature.work }}</h3>
+        <div>{{ literature.author }}</div>
+    {% endfor %}
+</body>
+</html>
