@@ -6,4 +6,6 @@ urlpatterns = [
     path('', views.main_page),
     path('literature/', views.literature),
     path('greeting/', views.greeting),
+    path('registration/', views.registration_page),
+    # path('authorization/', views.authorization_page)
 ]

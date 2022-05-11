@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms.authorization import AuthorizationForm
+from .forms.registration import RegistrationForm
 from .models import Post, Literature, GreetingAndWish
 
 
@@ -19,3 +21,32 @@ def greeting(request):
     greetings_and_wishes = GreetingAndWish.objects.order_by('-created_at').all()
     context = {'title': 'Приветстиве', 'greetings_and_wishes': greetings_and_wishes}
     return render(request, 'greeting.html', context)
+
+
+def registration_page(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = RegistrationForm
+
+    context = {
+        "reg_form": form,
+    }
+    return render(request, 'registration_page.html', context)
+
+
+# def authorization_page(request):
+#     if request.method == "POST":
+#         form = AuthorizationForm(request.POST)
+#         if form.is_valid():
+#             return redirect('/')
+#     else:
+#         form = AuthorizationForm
+#
+#     context = {
+#         "auth_form": form,
+#     }
+#     return render(request, 'authorization_page.html', context)
