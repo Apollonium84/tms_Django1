@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
+from .models import Profile
+
 
 class RegistrationForm(ModelForm):
     class Meta:
@@ -12,5 +14,10 @@ class RegistrationForm(ModelForm):
         user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
+
+            profile = Profile(user=user)
+            profile.save()
+
+
 
         return user
